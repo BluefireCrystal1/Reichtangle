@@ -38,10 +38,6 @@ module.exports = async (client) => {
                     Routes.applicationGuildCommands(clientId, guildId),
                     { body: CommandsArray },
                 );
-                await rest.put(
-                    Routes.applicationCommands(clientId),
-                    { body: CommandsArray },
-                );
 
                 console.log('Successfully reloaded application (/) commands.');
             } catch (error) {
