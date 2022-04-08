@@ -22,11 +22,11 @@ module.exports = async (client) => {
     (await PG(`${process.cwd()}/Commands/*/*.js`)).map(async (file) => {
         const command = require(file);
 
-        if (!command.name) return Table.addRow(file.split("/")[7], "❌ FAILED", "Missing a name.")
-        if (!command.description) return Table.addRow(command.name, "❌ FAILED", "Missing a description.")
+        if (!command.data.name) return Table.addRow(file.split("/")[7], "❌ FAILED", "Missing a data.name.")
+        if (!command.data.description) return Table.addRow(command.data.name, "❌ FAILED", "Missing a description.")
 
-        client.commands.set(command.name, command);
-        CommandsArray.push(command);
+        client.commands.set(command.data.name, command);
+        CommandsArray.push(command.data.toJSON());
 
         const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
@@ -45,7 +45,7 @@ module.exports = async (client) => {
             }
         })();
 
-        await Table.addRow(command.name, "✅ SUCCESSFUL")
+        await Table.addRow(command.data.name, "✅ SUCCESSFUL")
 
     });
 

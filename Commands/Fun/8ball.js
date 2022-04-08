@@ -1,17 +1,16 @@
 const { MessageEmbed } = require('discord.js');
 const { CommandInteraction } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders')
+
 
 module.exports = {
-    name: '8ball',
-    description: "8ball command!",
-    options: [
-        {
-            name: "question",
-            description: "Insert a question",
-            type: "3",
-            required: true
-        }
-    ],
+    data: new SlashCommandBuilder()
+        .setName('8ball')
+        .setDescription("8ball command!")
+        .addStringOption(option =>
+            option.setName("question")
+                .setDescription("Ask a question")
+                .setRequired(true)),
     /**
      * @param {CommandInteraction} interaction 
      */

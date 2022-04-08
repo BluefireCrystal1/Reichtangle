@@ -10,8 +10,14 @@ module.exports = {
      */
     async execute(message, client) {
         if(message.author.bot) return;
-        if(message.content.startsWith("Say the line, Reich!")) {
-            message.reply("Anschluss Time")
+        if(message.content.toLowerCase().startsWith("Say the line, Reich!".toLowerCase())) {
+            message.channel.send("Anschluss Time")
+        }
+        if(message.content.toLowerCase().startsWith("Hey".toLowerCase())) {
+            message.channel.send(`Hello! ${message.member.user.username}`)
+        }
+        if(message.content.toLowerCase().startsWith("Hello".toLowerCase())) {
+            message.channel.send(`Hi ${message.member.user.username}`)
         }
     }
 }

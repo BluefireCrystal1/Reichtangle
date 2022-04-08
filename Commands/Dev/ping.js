@@ -1,12 +1,28 @@
-const { CommandInteraction } = require('discord.js')
+const { CommandInteraction, MessageEmbed } = require('discord.js')
+const { SlashCommandBuilder } = require('@discordjs/builders')
 
 module.exports = {
-    name: 'ping',
-    description: "Bot latency",
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription("Bot latency"),
     /**
      * @param {CommandInteraction} interaction 
      */
     async execute(interaction) {
-        interaction.reply("Pong!")
+        const ping = Date.now() - interaction.createdTimestamp
+        const embed = new MessageEmbed()
+            .setTitle('Pong 🏓')
+            .setDescription(`🟢 \`${ping}\` ms `)
+            .setColor('GREEN')
+        const embed2 = new MessageEmbed()
+            .setTitle('Pong 🏓')
+            .setDescription(`🔴 \`${ping}\` ms `)
+            .setColor('RED')
+        if (ping > 50) {
+            interaction.reply({ content: 'Pong! 🏓', embeds: [embed2] })
+        }
+        if (ping < 50) {
+            interaction.reply({ content: 'Pong! 🏓', embeds: [embed] })
+        }
     }
 }

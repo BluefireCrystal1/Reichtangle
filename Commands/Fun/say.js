@@ -1,17 +1,15 @@
 const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders')
 const { CommandInteraction } = require('discord.js')
 
 module.exports = {
-    name: 'say',
-    description: 'Says something for you',
-    options: [
-        {
-            name: "input",
-            description: "The string to say.",
-            type: "3",
-            required: true
-        }
-    ],
+    data: new SlashCommandBuilder()
+        .setName('say')
+        .setDescription("Says input string")
+        .addStringOption(option =>
+            option.setName("input")
+                .setDescription("String to send")
+                .setRequired(true)),
     /**
      * @param {CommandInteraction} interaction 
      */
